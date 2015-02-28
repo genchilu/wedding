@@ -1,6 +1,6 @@
 $(function() {
-    $('.j-tooltip').tooltip();
-    var gem_install_message_pre = "\
+	$('.j-tooltip').tooltip();
+	var gem_install_message_pre = "\
 Fetching: addressable-2.3.5.gem (100%)\
 \nFetching: launchy-2.3.0.gem (100%)\
 \nFetching: require_all-1.3.2.gem (100%)\
@@ -9,7 +9,7 @@ Fetching: addressable-2.3.5.gem (100%)\
 \nFetching: rainbow-1.1.4.gem (100%)\
 \nFetching: wedding-0.0.1.gem (100%)\
 \n ";
-    var gem_install_message_post = "\
+	var gem_install_message_post = "\
 \n[[b;#d33682;]==== Release notes for wedding gem ====]\
 \n\
 \nNow that you have installed this gem, you earn our immense respect.\
@@ -34,17 +34,17 @@ Fetching: addressable-2.3.5.gem (100%)\
 \nSuccessfully installed wedding-0.0.1\
 \n7 gems installed\
 \n    ";
-    var prompt = "[[b;#d33682;]root]@[[b;#6c71c4;]wedding] ~$ ";
-    var days_left = Math.round((new Date('2013 11 29') - new Date())/(1000*60*60*24));
-    var wedding_url = "http://goo.gl/4tqfMs";
-    var rsvp_url = "https://twitter.com/jaipandya";
-    var venue_address = "\
+	var prompt = "[[b;#d33682;]root]@[[b;#6c71c4;]wedding] ~$ ";
+	var days_left = Math.round((new Date('2013 11 29') - new Date())/(1000*60*60*24));
+	var wedding_url = "http://goo.gl/4tqfMs";
+	var rsvp_url = "https://twitter.com/jaipandya";
+	var venue_address = "\
 Gandhi Nagar Club Gardens\
 \n(Near Gandhi Nagar Girls' School),\
 \nGandhi Nagar, Jaipur\
 \nPin - 302015\
     "
-    var ganesha = "\
+	var ganesha = "\
 \n                 _.!._             \
 \n                /O*@*O\\           \
 \n              <\\@(_)@/>           \
@@ -63,11 +63,11 @@ Gandhi Nagar Club Gardens\
 \n         \\::::( () | () )::::/    \
 \n          `\"\"\"`\\().'.()/'\"\"\"`     \
 \n          \
-  ";
-  var invitation_pre = "\
+	";
+	var invitation_pre = "\
 \n[[b;#d33682;]========= Wedding invitation ==========]\
-  ";
-  var jai_weds_prerita = "\
+	";
+	var jai_weds_prerita = "\
 \n       __      _    \
 \n      / /___ _(_)   \
 \n __  / / __ `/ /    \
@@ -81,8 +81,8 @@ Gandhi Nagar Club Gardens\
 \n / ____/ /  /  __/ /  / / /_/ /_/ /  \
 \n/_/   /_/   \\___/_/  /_/\\__/\\__,_/   \
 \n                                     \
-  ";
-  var invitation_post = "\
+	";
+	var invitation_post = "\
 \nHi,\
 \n\
 \nWe are getting married on 29 November 13. It will \
@@ -97,16 +97,16 @@ Gandhi Nagar Club Gardens\
 \n\
 \nPack your bags! Only [[b;#cb4b16;]" + days_left + "] days left.                 \
 \n\
-  ";
-    var wedding_help = "\
+	";
+	var wedding_help = "\
 Commands: \
 \n\t[[b;#268bd2;]wedding invitation]      [[b;#2aa198;]# Your invitation card is inside this envelope] \
 \n\t[[b;#268bd2;]wedding bride]           [[b;#2aa198;]# Glory words about the bride] \
 \n\t[[b;#268bd2;]wedding groom]           [[b;#2aa198;]# Glory words about the groom] \
 \n\t[[b;#268bd2;]wedding location]        [[b;#2aa198;]# Google maps link to the wedding venue] \
 \n\t[[b;#268bd2;]wedding rsvp]            [[b;#2aa198;]# RSVP for the event]\
-  ";
-    var bride = "\
+	";
+	var bride = "\
 \n[[b;#d33682;]========= Bride ==========]\
 \n\
 \nThe bride's name is Prerita\
@@ -115,8 +115,8 @@ Commands: \
 \nIf you want to contact her, her email ID\
 \nis preritayadav@gmail.com\
 \n\
-  ";
-    var groom = "\
+	";
+	var groom = "\
 \n[[b;#d33682;]========= Groom ==========]\
 \n\
 \nThe groom's name is Jai\
@@ -127,23 +127,23 @@ Commands: \
 \ntwitter - https://twitter.com/jaipandya \
 \ngithub - https://github.com/jaipandya \
 \n\
-  ";
-    var rsvp = "\
+	";
+	var rsvp = "\
 \nYou can RSVP to the event by sending an email to\
 \nJai (jaipandya@gmail.com)\
 \nor Prerita (preritayadav@gmail.com)\
 \n        \
-  ";
-    var you_are_late = "\
+	";
+	var you_are_late = "\
 Sorry, you are slightly late for attending the event. \
 \nJai and Prerita have already got married on 29th November \
 \nBut this site will remain here for archival purpose. \
 \nRoam around happily :-) \
 \n  "
-    if (days_left >= 0) {
-      you_are_late = ''
-    }
-    var greetings = you_are_late + jai_weds_prerita + "\
+	if (days_left >= 0) {
+		you_are_late = ''
+	}
+	var greetings = you_are_late + jai_weds_prerita + "\
 \n\nWelcome to Prerita and Jai's wedding website. In order to retrieve your \
 \ninvitation, first install wedding gem using [[b;#859900;]gem install wedding] command.\
 \nOnce the gem is installed, type [[b;#859900;]wedding] in the terminal to see the list of\
@@ -161,56 +161,57 @@ Sorry, you are slightly late for attending the event. \
     var print_gem = 'RubyGems is a sophisticated package manager for Ruby.  This is a\nbasic help message containing pointers to more information.\n\n  Usage:\n    gem -v\n    gem command [arguments...] [options...]\n\n  Examples:\n    gem install rake\n    gem list --local\n    gem build package.gemspec\n    gem help install\n\n  Further help:\n    gem help commands            list all \'gem\' commands\n    gem help examples            show some examples of usage\n    gem help platforms           show information about platforms\n    gem help <COMMAND>           show help on COMMAND\n                                   (e.g. \'gem help install\')\n    gem server                   present a web page at\n                                 http://localhost:8808/\n                                 with info about installed gems\n  Further information:\n    http://rubygems.rubyforge.org';
 
     function print_slowly(term, paragraph, callback) {
-      var foo, i, lines;
-      lines = paragraph.split("\n");
-      term.pause();
-      i = 0;
-      foo = function(lines) {
-        return setTimeout((function() {
-          if (i < lines.length -1) {
-            term.echo(lines[i]);
-            i++;
-            return foo(lines);
-          } else {
-            term.resume();
-            return callback();
-          }
-        }), 1000);
-      };
-      return foo(lines);
+		var foo, i, lines;
+		lines = paragraph.split("\n");
+		term.pause();
+		i = 0;
+		foo = function(lines) {
+			return setTimeout((function() {
+				if (i < lines.length -1) {
+					term.echo(lines[i]);
+					i++;
+					return foo(lines);
+				} else {
+					term.resume();
+					return callback();
+				}
+			}), 1000);
+		};
+		return foo(lines);
     };
-    function require_command(command_regex, terminal_history) {
-      var executed = false;
-      $.each(terminal_history, function(index, value){
-        if (command_regex.test(value)) {
-          executed = true
-        }
-      });
-      return executed;
-        
+
+	function require_command(command_regex, terminal_history) {
+		var executed = false;
+		$.each(terminal_history, function(index, value){
+			if (command_regex.test(value)) {
+				executed = true
+			}
+		});
+		return executed;      
     }
+
     var gem_install_regex = /gem +install +wedding */ig;
 
     // Handle gem command
-    function gem(inputs, term){
-      // No second argument
-      if (!inputs[1]) {
-        term.echo(print_gem);
-      } else if (inputs[1] === 'install' && inputs[2] === 'wedding') {
-        print_slowly(term, gem_install_message_pre, function(){
-          term.echo(gem_install_message_post)
-        });
-      } else if (inputs[1] === '-v') {
-        term.echo('1.3.6');
-      } else if (inputs[1] == 'list') {
-        // if history has install wedding
-        term.echo(gem_list_full);
-        // else
-        // term.echo(gem_list_empty)
-      } else {
-        term.echo(inputs.join(" ") + " is not a valid command")
-      }
-    }
+	function gem(inputs, term){
+		// No second argument
+		if (!inputs[1]) {
+			term.echo(print_gem);
+		} else if (inputs[1] === 'install' && inputs[2] === 'wedding') {
+			print_slowly(term, gem_install_message_pre, function(){
+				term.echo(gem_install_message_post)
+			});
+		} else if (inputs[1] === '-v') {
+			term.echo('1.3.6');
+		} else if (inputs[1] == 'list') {
+			// if history has install wedding
+			term.echo(gem_list_full);
+			// else
+			// term.echo(gem_list_empty)
+		} else {
+			term.echo(inputs.join(" ") + " is not a valid command")
+		}
+	}
 
     // Handle wedding command
     function wedding(inputs, term){
@@ -267,72 +268,71 @@ Sorry, you are slightly late for attending the event. \
     }
 
     // Main interpreter function
-    function interpreter(input, term) {
-      var command, inputs;
-      inputs = input.split(/ +/)
-      command = inputs[0];
-      if (command === "gem") {
-        gem(inputs, term);
-      } else if (command === "wedding" || command === "help") {
-        window.terminal = term;
-        if (require_command(gem_install_regex, term.history().data())) {
-          wedding(inputs, term);
-        } else {
-          term.error('Please install the gem first by executing\ngem install wedding');
-        }
-      } else if (/(cd)|(ls)|(cat)/.test(command)) {
-        bash(inputs, term);
-      } else if (input === "ruby -v"){
-        term.echo("1.9.3");
-      } else if (/which +wedding/.test(input)) {
-        if (require_command(gem_install_regex, term.history().data())) {
-          term.echo("/usr/bin/wedding");
-        } // else do nothing
-      } else if (/whoami/.test(input)) {
-        term.echo("root");
-      } else if (command.length === 0) {
-        // do nothing
-      } else {
-        term.error(command + " is not a valid command");
-      }
-    }
+	function interpreter(input, term) {
+		var command, inputs;
+		inputs = input.split(/ +/)
+		command = inputs[0];
+		if (command === "gem") {
+			gem(inputs, term);
+		} else if (command === "wedding" || command === "help") {
+			window.terminal = term;
+			if (require_command(gem_install_regex, term.history().data())) {
+				wedding(inputs, term);
+			} else {
+				term.error('Please install the gem first by executing\ngem install wedding');
+			}
+		} else if (/(cd)|(ls)|(cat)/.test(command)) {
+			bash(inputs, term);
+		} else if (input === "ruby -v"){
+			term.echo("1.9.3");
+		} else if (/which +wedding/.test(input)) {
+			if (require_command(gem_install_regex, term.history().data())) {
+				term.echo("/usr/bin/wedding");
+			} // else do nothing
+		} else if (/whoami/.test(input)) {
+			term.echo("root");
+		} else if (command.length === 0) {
+		// do nothing
+		} else {
+			term.error(command + " is not a valid command");
+		}
+	}
 
     // Handle bash commands
     function bash(inputs, term) {
-      var argument, echo, insert;
+		var argument, echo, insert;
+		echo = term.echo;
+		insert = term.insert;
+		if (!inputs[1]) {
+			return console.log("none");
+		} else {
+			argument = inputs[1];
+			if (/^\.\./.test(argument)) {
+				return echo("-bash: cd: " + argument + ": Permission denied");
+			} else {
+				return echo("-bash: cd: " + argument + ": No such file or directory");
+			}
+		}
+	};
 
-      echo = term.echo;
-      insert = term.insert;
-      if (!inputs[1]) {
-        return console.log("none");
-      } else {
-        argument = inputs[1];
-        if (/^\.\./.test(argument)) {
-          return echo("-bash: cd: " + argument + ": Permission denied");
-        } else {
-          return echo("-bash: cd: " + argument + ": No such file or directory");
-        }
-      }
-    };
+	$('#terminal').terminal( interpreter, {
+		prompt: prompt,
+		name: 'wedding',
+		greetings: greetings,
+		height: 600,
+		onInit: function(term){
+			term.insert("gem install wedding");
+			term.history().clear();
 
-    $('#terminal').terminal( interpreter, {
-      prompt: prompt,
-      name: 'wedding',
-      greetings: greetings,
-      height: 600,
-      onInit: function(term){
-        term.insert("gem install wedding");
-        term.history().clear();
-      },
-      completion: function(term, string, callback){
-        callback(['gem install wedding',
-          'wedding invitation',
-          'wedding location',
-          'wedding groom',
-          'wedding rsvp',
-          'wedding bride']);
-      },
-      tabcompletion: true
-    });
-
+		},
+		completion: function(term, string, callback){
+			callback(['gem install wedding',
+				'wedding invitation',
+				'wedding location',
+				'wedding groom',
+				'wedding rsvp',
+				'wedding bride']);
+		},
+		tabcompletion: true
+	});
 });
