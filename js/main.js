@@ -1,157 +1,130 @@
 $(function() {
 	$('.j-tooltip').tooltip();
-	var gem_install_message_pre = "\
-Fetching: addressable-2.3.5.gem (100%)\
-\nFetching: launchy-2.3.0.gem (100%)\
-\nFetching: require_all-1.3.2.gem (100%)\
-\nFetching: thor-0.18.1.gem (100%)\
-\nFetching: artii-2.0.3.gem (100%)\
-\nFetching: rainbow-1.1.4.gem (100%)\
-\nFetching: wedding-0.0.1.gem (100%)\
-\n ";
-	var gem_install_message_post = "\
-\n[[b;#d33682;]==== Release notes for wedding gem ====]\
-\n\
-\nNow that you have installed this gem, you earn our immense respect.\
-\nYou are the star guest of our wedding, you will receive our special\
-\nattention.\
-\n    Go ahead and type [[b;#859900;]wedding] on the command prompt to see the\
-\nlist of commands available with it. Print your personal invitation,\
-\nand fire your browser to see the location of the event.\
-\n\
-\nWe love you!\
-\n\
-\n[[b;#b58900;]Prerita and Jai]\
-\n\
-\n[[b;#d33682;]=======================================]\
-\n\
-\nSuccessfully installed addressable-2.3.5\
-\nSuccessfully installed launchy-2.3.0\
-\nSuccessfully installed require_all-1.3.2\
-\nSuccessfully installed thor-0.18.1\
-\nSuccessfully installed artii-2.0.3\
-\nSuccessfully installed rainbow-1.1.4\
-\nSuccessfully installed wedding-0.0.1\
-\n7 gems installed\
-\n    ";
+
+	var apt_get_install_message_pre = "\
+正在讀取套件清單... 完成\
+\n正在重建相依關係\
+\n正在讀取狀態資料... 完成\
+\n升級 0 個，新安裝 1 個，移除 0 個，有 0 個未被升級。\
+\n需要下載 556.6 kB 的套件檔。\
+\n此操作完成之後，會多佔用 5,566 kB 的磁碟空間。\
+\n下載:1 http://archive.ubuntu.com/ubuntu/ trusty/main wedding amd64 1.0.0 [556.6 kB]\
+\n取得 556.6 kB in 1s (556.6 kB/s)\
+\n選取了原先未選的套件 wedding:amd64。\
+\n讀取資料庫 ... 目前共安裝了 5566 個檔案和目錄。\
+\n準備解開 .../wedding_1.0.0_amd64.deb ...\
+\n解開 wedding:amd64 (1.0.0) 中 ...\
+\n設定 wedding:amd64 (1.0.0) ...\
+";
+
+	var apt_get_install_empty = "\
+正在讀取套件清單... 完成\
+\n正在重建相依關係\
+\n正在讀取狀態資料... 完成\
+\n升級 0 個，新安裝 0 個，移除 0 個，有 0 個未被升級\
+";
+
 	var prompt = "[[b;#d33682;]root]@[[b;#6c71c4;]wedding] ~$ ";
-	var days_left = Math.round((new Date('2013 11 29') - new Date())/(1000*60*60*24));
-	var wedding_url = "http://goo.gl/4tqfMs";
-	var rsvp_url = "https://twitter.com/jaipandya";
-	var venue_address = "\
-Gandhi Nagar Club Gardens\
-\n(Near Gandhi Nagar Girls' School),\
-\nGandhi Nagar, Jaipur\
-\nPin - 302015\
-    "
-	var ganesha = "\
-\n                 _.!._             \
-\n                /O*@*O\\           \
-\n              <\\@(_)@/>           \
-\n      ,;,   .--;`     `;--.   ,    \
-\n      O@O_ /   |d     b|   \\ _hnn \
-\n      | `/ \\   |       |   / \\` |\
-\n      &&&&  :##;\\     /;##;  &&&& \
-\n      |  \\ / `##/|   |##'  \\ /  |\
-\n      \\   %%`</|   |#'`%%   / \
-\n       '._|_ \\   |   |'  / _|_.'  \
-\n         _/  /   \\   \\   \\  \\  \
-\n        / (\\(     '.  '-._&&&&    \
-\n       (  ()##,    o'--.._`\\-)    \
-\n        '-():`##########'()()()    \
-\n         /:::::/()`Y`()\\:::::\\   \
-\n         \\::::( () | () )::::/    \
-\n          `\"\"\"`\\().'.()/'\"\"\"`     \
-\n          \
-	";
-	var invitation_pre = "\
-\n[[b;#d33682;]========= Wedding invitation ==========]\
-	";
-	var jai_weds_prerita = "\
-\n       __      _    \
-\n      / /___ _(_)   \
-\n __  / / __ `/ /    \
-\n/ /_/ / /_/ / /     \
-\n\\____/\\__,_/_/      \
+	var days_left = Math.round((new Date('2015 05 02') - new Date())/(1000*60*60*24));
+	var reservation_url = "http://goo.gl/EtmNRv";
+	var reservation_address = "高雄市中山區中山南路 437 號"
+
+	var apt_get_no_permission_post = "\
+\nE: 無法開啟鎖定檔 /var/lib/apt/lists/lock - open (13: 拒絕不符權限的操作)\
+\nE: 無法鎖定 /var/lib/apt/lists/ 目錄\
+\nE: 無法開啟鎖定檔 /var/lib/dpkg/lock - open (13: 拒絕不符權限的操作)\
+\nE: Unable to lock the administration directory (/var/lib/dpkg/), are you root?\
+";
+
+	var apt_get_command = ['update', 'upgrade', 'dist-upgrade', 'autoremove']
+
+	var g7_weds_mono = "\
+\n                                             \
+\n                                              \
+\n          (`-')  <-. (`-')_ (`-').-> _      \
+\n    .->   ( OO).-/  \\( OO) )(OO )__ (_)     \
+\n ,---(`-'(,------,--./ ,--/,--. ,'-',-(`-') \
+\n'  .-(OO )|  .---|   \\ |  ||  | |  || ( OO) \
+\n|  | .-, (|  '--.|  . '|  ||  `-'  ||  |  ) \
+\n|  | '.(_/|  .--'|  |\\    ||  .-.  (|  |_/  \
+\n|  '-'  | |  `---|  | \\   ||  | |  ||  |'-> \
+\n `-----'  `------`--'  `--'`--' `--'`--'    \
 \n\
 \n    weds                             \
-\n    ____                 _ __        \
-\n   / __ \\________  _____(_) /_____ _ \
-\n  / /_/ / ___/ _ \\/ ___/ / __/ __ `/ \
-\n / ____/ /  /  __/ /  / / /_/ /_/ /  \
-\n/_/   /_/   \\___/_/  /_/\\__/\\__,_/   \
-\n                                     \
+\n\
+\n    <-. (`-')           <-. (`-')_           \
+\n       \\(OO )_     .->     \\( OO) )    .->   \
+\n    ,--./  ,-.(`-')----.,--./ ,--/(`-')----. \
+\n    |   `.'   ( OO).-.  |   \\ |  |( OO).-.  '\
+\n    |  |'.'|  ( _) | |  |  . '|  |( _) | |  |\
+\n    |  |   |  |\\|  |)|  |  |\\    | \\|  |)|  |\
+\n    |  |   |  | '  '-'  |  | \\   |  '  '-'  '\
+\n    `--'   `--'  `-----'`--'  `--'   `-----' \
 	";
+
 	var invitation_post = "\
-\nHi,\
-\n\
-\nWe are getting married on 29 November 13. It will \
-\nbe a great pleasure for us to have your presence  \
-\nin the wedding ceremony.                          \
-\n                                                  \
-\nEvent schedule:                                   \
-\n\
-\n 7:00 pm Barat starts from Home                   \
-\n 8:00 pm Barat reaches venue                      \
-\n12:00 am Phere                                    \
-\n\
-\nPack your bags! Only [[b;#cb4b16;]" + days_left + "] days left.                 \
-\n\
-	";
+\n______________________________________________________\
+\n  大家好，\
+\n  我們要在今年(2015)的五月二號互許終生啦！\
+\n  歡迎各位親愛的捧油們一起來見證我們的婚禮，\
+\n  現場將不會有任何 iphone 抽獎，請大家不用期待！\
+\n______________________________________________________\
+\n                 Mono    &  _  Genchi\
+\n       ___           {@}  _|=|_\
+\n      /___\         /(\")\\  (\")\
+\n   .---'-'---.     /((~))\\/<x>\\       _   .-.\
+\n  /___________\    ~~/@\~~\\|_|/      <v> ((_))\
+\n   | A /^\ A |      /   \\  |||      ((_)) '-'\
+\n   |   |\"|   |     /~@~@~\\ |||       '-' \
+\n___|___|_|___|____/______\_\|||_________May  2  2015___\
+\n";
 	var wedding_help = "\
 Commands: \
-\n\t[[b;#268bd2;]wedding invitation]      [[b;#2aa198;]# Your invitation card is inside this envelope] \
-\n\t[[b;#268bd2;]wedding bride]           [[b;#2aa198;]# Glory words about the bride] \
-\n\t[[b;#268bd2;]wedding groom]           [[b;#2aa198;]# Glory words about the groom] \
-\n\t[[b;#268bd2;]wedding location]        [[b;#2aa198;]# Google maps link to the wedding venue] \
-\n\t[[b;#268bd2;]wedding rsvp]            [[b;#2aa198;]# RSVP for the event]\
+\n\t[[b;#268bd2;]wedding invitation]      [[b;#2aa198;]# 邀請卡內容] \
+\n\t[[b;#268bd2;]wedding bride]           [[b;#2aa198;]# 關於新娘] \
+\n\t[[b;#268bd2;]wedding groom]           [[b;#2aa198;]# 關於新郎] \
+\n\t[[b;#268bd2;]wedding location]        [[b;#2aa198;]# 婚禮地點的 google map 連結] \
 	";
 	var bride = "\
-\n[[b;#d33682;]========= Bride ==========]\
+\n[[b;#d33682;]========= 新娘 ==========]\
 \n\
-\nThe bride's name is Prerita\
-\nShe is a Banker, Traveller, Dancer, Painter, Dreamer\
-\nShe works as Asst. Manager at Bank of Baroda\
-\nIf you want to contact her, her email ID\
-\nis preritayadav@gmail.com\
+\n新娘的名字是江孟蓉，高雄出生。\
+\n目前在嘉義長庚醫院服務的護理師，同時也是一位極為刁鑽的 PM。\
+\n最為人津津樂道的是他挑男朋友的眼光極佳。\
+\n你可以透過下列臉書連結聯繫她：\
+\nhttps://www.facebook.com/profile.php?id=100000138559507\
 \n\
 	";
 	var groom = "\
-\n[[b;#d33682;]========= Groom ==========]\
+\n[[b;#d33682;]========= 新郎 ==========]\
 \n\
-\nThe groom's name is Jai\
-\nHe is a Programmer, Traveller, Photographer, Biker, SlideShare Engineer\
-\nHe works as a Hacker at SlideShare\
-\nemail - jaipandya@gmail.com\
+\n新郎的名字是盧俊錡，高雄出生。\
+\n他是一名不專業的軟體工程師，服務於專利雲公司，擅長解決 PM 刁鑽的問題。\
+\n2009 年以一名資深阿宅騙到正妹護士當女朋友得意至今。\
+\nemail - genchilu@gmail.com\
 \nlinkedin - https://www.linkedin.com/in/jaipandya \
-\ntwitter - https://twitter.com/jaipandya \
-\ngithub - https://github.com/jaipandya \
+\nfacebook - https://www.facebook.com/profile.php?id=100000141676197\
+\ngithub - https://github.com/genchilu \
 \n\
 	";
-	var rsvp = "\
-\nYou can RSVP to the event by sending an email to\
-\nJai (jaipandya@gmail.com)\
-\nor Prerita (preritayadav@gmail.com)\
-\n        \
-	";
+
 	var you_are_late = "\
-Sorry, you are slightly late for attending the event. \
-\nJai and Prerita have already got married on 29th November \
-\nBut this site will remain here for archival purpose. \
-\nRoam around happily :-) \
+相當遺憾，您錯過了這場盛宴。 \
+\n孟容和俊錡已經在 2015/05/02 完成人生大事， \
+\n但您仍可以從這網站知道一些婚禮細節。 \
+\n您可以從新郎新娘資訊得到我們的聯絡方式。 \
 \n  "
 	if (days_left >= 0) {
 		you_are_late = ''
 	}
-	var greetings = you_are_late + jai_weds_prerita + "\
-\n\nWelcome to Prerita and Jai's wedding website. In order to retrieve your \
-\ninvitation, first install wedding gem using [[b;#859900;]gem install wedding] command.\
-\nOnce the gem is installed, type [[b;#859900;]wedding] in the terminal to see the list of\
-\navailable commands. \
+	var greetings = you_are_late + g7_weds_mono + "\
+\n\n歡迎參加俊錡和孟蓉的婚禮！為了確保您能及時收到婚禮的相關資訊，\
+\n請先輸入[[b;#859900;]apt-get install wedding] 指令安裝婚禮小幫手。\
+\n安裝完成後即可輸入 [[b;#859900;]wedding] 指令查詢婚禮相關資訊。 \
+\n使用中有任何問題您可輸入 [[b;#859900;]help] 指令得到協助。\
+\n\
 \n \
-\nThe gem is available for download at https://rubygems.org/gems/wedding \
-\n \
-\nPress [[b;#859900;]enter (↩)] to install the gem on this terminal.\
+\n按下 [[b;#859900;]enter (↩)] 在終端機安裝婚禮小幫手.\
 \n  ";
 
     var gem_list_empty = '\n*** LOCAL GEMS ***\n';
@@ -190,101 +163,72 @@ Sorry, you are slightly late for attending the event. \
 		return executed;      
     }
 
-    var gem_install_regex = /gem +install +wedding */ig;
+	var apt_get_install_regex = /apt-get install +wedding */ig;
 
-    // Handle gem command
-	function gem(inputs, term){
+    // Handle apt-get command
+	function apt_get(inputs, term){
 		// No second argument
 		if (!inputs[1]) {
 			term.echo(print_gem);
-		} else if (inputs[1] === 'install' && inputs[2] === 'wedding') {
-			print_slowly(term, gem_install_message_pre, function(){
-				term.echo(gem_install_message_post)
+		} else if (inputs[1] === 'install' && !inputs[2]) {
+			print_slowly(term, apt_get_install_empty , function(){
 			});
-		} else if (inputs[1] === '-v') {
-			term.echo('1.3.6');
-		} else if (inputs[1] == 'list') {
-			// if history has install wedding
-			term.echo(gem_list_full);
-			// else
-			// term.echo(gem_list_empty)
+		}else if (inputs[1] === 'install' && inputs[2] === 'wedding') {
+			print_slowly(term, apt_get_install_message_pre, function(){
+			});
+		} else if (apt_get_command.indexOf(inputs[1]) != -1) {
+			term.echo(apt_get_no_permission_post);
 		} else {
-			term.echo(inputs.join(" ") + " is not a valid command")
+			term.echo("E: 無效的操作 " + inputs[1])
 		}
 	}
 
     // Handle wedding command
     function wedding(inputs, term){
-      if (!inputs[1]) {
-        term.echo(wedding_help);
-      } else if (inputs[1] === "bride") {
-        term.echo(bride);
-      } else if (inputs[1] === "groom") {
-        term.echo(groom)
-      } else if (inputs[1] === "invitation") {
-        term.echo("[[;#b58900;]"+ganesha+ "]");
-        term.echo(invitation_pre);
-        term.pause();
-        setTimeout(function(){
-          term.resume();
-          term.echo(jai_weds_prerita);
-          term.pause();
-          setTimeout(function(){
-            term.resume();
-            term.echo(invitation_post);
-          }, 400)
-        }, 1500)
-        
-      } else if (inputs[1] === "location") {
-        term.echo(venue_address);
-        term.echo(wedding_url);
-        term.push(function(command, term) {
-          if (/y(es){0,1}/.test(command)) {
-            window.open(
-              wedding_url,
-              '_blank'
-            );
-          }
-          term.pop();
-        }, {
-          prompt: 'Do you want to open this link in the browser? (yes/no) ',
-          greetings: null
-        });
-      } else if (inputs[1] === "rsvp") {
-        term.echo(rsvp)
-        term.push(function(command, term) {
-          window.open(
-              rsvp_url,
-              '_blank'
-          );
-          term.pop();
-        }, {
-          prompt: 'alternatively send me a tweet in a new window when you press [[b;#859900;]enter (↩)]',
-          greetings: null
-        });
-      } else {
-        term.error(inputs.join(" ") + " is not a valid command")
-      }
-    }
+		if (!inputs[1]) {
+			term.echo(wedding_help);
+		} else if (inputs[1] === "bride") {
+			term.echo(bride);
+		} else if (inputs[1] === "groom") {
+			term.echo(groom)
+		} else if (inputs[1] === "invitation") {
+			term.echo(invitation_post);
+		} else if (inputs[1] === "location") {
+			term.echo(reservation_url_address);
+			term.echo(reservation_url_url);
+			term.push(function(command, term) {
+				if (/y(es){0,1}/.test(command)) {
+					window.open(
+						reservation_url_url,
+						'_blank'
+					);
+				}
+				term.pop();
+			}, {
+				prompt: '是否在新視窗開啟地圖連結？ (yes/no) ',
+				greetings: null
+			});
+		} else {
+			term.error(inputs + " : 查無指令")
+		}
+	}
 
     // Main interpreter function
 	function interpreter(input, term) {
 		var command, inputs;
 		inputs = input.split(/ +/)
 		command = inputs[0];
-		if (command === "gem") {
-			gem(inputs, term);
+		if (command === "apt-get") {
+			apt_get(inputs, term);
 		} else if (command === "wedding" || command === "help") {
 			window.terminal = term;
-			if (require_command(gem_install_regex, term.history().data())) {
+			if (require_command(apt_get_install_regex, term.history().data())) {
 				wedding(inputs, term);
 			} else {
-				term.error('Please install the gem first by executing\ngem install wedding');
+				term.error('婚禮小幫手尚未安裝！\n請輸入 apt-get install wedding 指令安裝婚禮小幫手。');
 			}
 		} else if (/(cd)|(ls)|(cat)/.test(command)) {
 			bash(inputs, term);
-		} else if (input === "ruby -v"){
-			term.echo("1.9.3");
 		} else if (/which +wedding/.test(input)) {
 			if (require_command(gem_install_regex, term.history().data())) {
 				term.echo("/usr/bin/wedding");
@@ -294,7 +238,7 @@ Sorry, you are slightly late for attending the event. \
 		} else if (command.length === 0) {
 		// do nothing
 		} else {
-			term.error(command + " is not a valid command");
+			term.error(command + ": 無此指令");
 		}
 	}
 
@@ -308,9 +252,9 @@ Sorry, you are slightly late for attending the event. \
 		} else {
 			argument = inputs[1];
 			if (/^\.\./.test(argument)) {
-				return echo("-bash: cd: " + argument + ": Permission denied");
+				return echo("-bash: cd: " + argument + ": 拒絕不符權限的操作");
 			} else {
-				return echo("-bash: cd: " + argument + ": No such file or directory");
+				return echo("-bash: cd: " + argument + ": 沒有此一檔案或目錄");
 			}
 		}
 	};
@@ -321,16 +265,15 @@ Sorry, you are slightly late for attending the event. \
 		greetings: greetings,
 		height: 600,
 		onInit: function(term){
-			term.insert("gem install wedding");
+			term.insert("apt-get install wedding");
 			term.history().clear();
 
 		},
 		completion: function(term, string, callback){
-			callback(['gem install wedding',
+			callback(['apt-get install wedding',
 				'wedding invitation',
 				'wedding location',
 				'wedding groom',
-				'wedding rsvp',
 				'wedding bride']);
 		},
 		tabcompletion: true
