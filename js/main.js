@@ -127,12 +127,50 @@ Commands: \
 \n按下 [[b;#859900;]enter (↩)] 在終端機安裝婚禮小幫手.\
 \n  ";
 
-    var gem_list_empty = '\n*** LOCAL GEMS ***\n';
-    var gem_list_full = '\n*** LOCAL GEMS ***\n\naddressable (2.3.5)\nlaunchy (2.3.0)\nrequire_all (1.3.2)\nthor (0.18.1)\nartii (2.0.3)\nrainbow (1.1.4)\nwedding (0.0.1)\n';
-
-
-    var print_gem = 'RubyGems is a sophisticated package manager for Ruby.  This is a\nbasic help message containing pointers to more information.\n\n  Usage:\n    gem -v\n    gem command [arguments...] [options...]\n\n  Examples:\n    gem install rake\n    gem list --local\n    gem build package.gemspec\n    gem help install\n\n  Further help:\n    gem help commands            list all \'gem\' commands\n    gem help examples            show some examples of usage\n    gem help platforms           show information about platforms\n    gem help <COMMAND>           show help on COMMAND\n                                   (e.g. \'gem help install\')\n    gem server                   present a web page at\n                                 http://localhost:8808/\n                                 with info about installed gems\n  Further information:\n    http://rubygems.rubyforge.org';
-
+	var print_apt = '\
+\napt 1.0.1ubuntu2 是用於 amd64 並在 Oct 28 2014 20:55:14 上編譯的\
+\n用法: apt-get [選項] 指令\
+\n		apt-get [選項] install|remove 套件1 [套件2 ...]\
+\n		apt-get [選項] source 套件1 [套件2 ...]\
+\n\
+\napt-get 是下載及安裝套件的簡易指令列介面。最常用指令為 update\
+\n及 install。\
+\
+\n指令:\
+\n		update - 取得新套件清單\
+\n		upgrade - 進行升級\
+\n		install - 安裝新套件 (「套件」為 libc6 而非 libc6.deb)\
+\n		remove - 移除套件\
+\n		autoremove - 自動移除所有無用套件\
+\n		purge - 移除套件及設定檔\
+\n		source - 下載源碼檔\
+\n		build-dep - Configure build-dependencies for source packages\
+\n		dist-upgrade - 發行版升級，見 apt-get(8)\
+\n		dselect-upgrade - Follow dselect selections\
+\n		clean - 清除已下載套件檔\
+\n		autoclean - 清除已下載舊套件檔\
+\n		check - Verify that there are no broken dependencies\
+\n		changelog - 下載並顯示該套件的變更紀錄\
+\n		download - 將二進檔下載至當前目錄\
+\n\
+\n	選項:\
+\n		-h  本求助文字.\
+\n		-q  Loggable output - no progress indicator\
+\n		-qq No output except for errors\
+\n		-d  只下載 - 下安裝或解開套件檔\
+\n		-s  No-act. Perform ordering simulation\
+\n		-y  Assume Yes to all queries and do not prompt\
+\n		-f  Attempt to correct a system with broken dependencies in place\
+\n		-m  Attempt to continue if archives are unlocatable\
+\n		-u  Show a list of upgraded packages as well\
+\n		-b  取得源碼套件後編譯\
+\n		-V  顯示詳細版本號\
+\n		-c=? 讀取此設定檔案\
+\n		-o=? 設定任意設定選項，如 -o dir::cache=/tmp\
+\n		更多資料及選項見 apt-get(8)、sources.list(5) 及 apt.conf(5) manual\
+\n		page\
+\n	                   This APT has Super Cow Powers.\
+	';
     function print_slowly(term, paragraph, callback) {
 		var foo, i, lines;
 		lines = paragraph.split("\n");
@@ -169,7 +207,7 @@ Commands: \
 	function apt_get(inputs, term){
 		// No second argument
 		if (!inputs[1]) {
-			term.echo(print_gem);
+			term.echo(print_apt);
 		} else if (inputs[1] === 'install' && !inputs[2]) {
 			print_slowly(term, apt_get_install_empty , function(){
 			});
