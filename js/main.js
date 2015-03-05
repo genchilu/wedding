@@ -3,7 +3,7 @@ $(function() {
 
 
 	var prompt = "[[b;#d33682;]root]@[[b;#6c71c4;]wedding] ~$ ";
-	var days_left = Math.round((new Date('2015 01 02') - new Date())/(1000*60*60*24));
+	var days_left = Math.round((new Date('2015 05 02') - new Date())/(1000*60*60*24));
 	var reservation_url = "http://goo.gl/EtmNRv";
 	var reservation_address = "高雄市中山區中山南路 437 號"
 	
@@ -23,16 +23,15 @@ $(function() {
 \n|  '-'  | |  `---|  | \\   ||  | |  ||  |'-> \
 \n `-----'  `------`--'  `--'`--' `--'`--'    \
 \n\
-\n    weds                             \
-\n\
-\n    <-. (`-')           <-. (`-')_           \
-\n       \\(OO )_     .->     \\( OO) )    .->   \
-\n    ,--./  ,-.(`-')----.,--./ ,--/(`-')----. \
-\n    |   `.'   ( OO).-.  |   \\ |  |( OO).-.  '\
-\n    |  |'.'|  ( _) | |  |  . '|  |( _) | |  |\
-\n    |  |   |  |\\|  |)|  |  |\\    | \\|  |)|  |\
-\n    |  |   |  | '  '-'  |  | \\   |  '  '-'  '\
-\n    `--'   `--'  `-----'`--'  `--'   `-----' \
+\n    weds\
+\n                <-. (`-')           <-. (`-')_           \
+\n                   \\(OO )_     .->     \\( OO) )    .->   \
+\n                ,--./  ,-.(`-')----.,--./ ,--/(`-')----. \
+\n                |   `.'   ( OO).-.  |   \\ |  |( OO).-.  '\
+\n                |  |'.'|  ( _) | |  |  . '|  |( _) | |  |\
+\n                |  |   |  |\\|  |)|  |  |\\    | \\|  |)|  |\
+\n                |  |   |  | '  '-'  |  | \\   |  '  '-'  '\
+\n                `--'   `--'  `-----'`--'  `--'   `-----' \
 	";
 
 	var invitation_post = "\
@@ -44,12 +43,12 @@ $(function() {
 \n______________________________________________________\
 \n                 Mono    &  _  Genchi\
 \n       ___           {@}  _|=|_\
-\n      /___\         /(\")\\  (\")\
+\n      /___\\         /(\")\\  (\")\
 \n   .---'-'---.     /((~))\\/<x>\\       _   .-.\
-\n  /___________\    ~~/@\~~\\|_|/      <v> ((_))\
-\n   | A /^\ A |      /   \\  |||      ((_)) '-'\
+\n  /___________\\    ~~/@\\~~\\|_|/      <v> ((_))\
+\n   | A /^\\ A |      /   \\  |||      ((_)) '-'\
 \n   |   |\"|   |     /~@~@~\\ |||       '-' \
-\n___|___|_|___|____/______\_\|||_________May  2  2015___\
+\n___|___|_|___|____/_______\\|||_________May  2  2015___\
 \n";
 	var wedding_help = "\
 Commands: \
@@ -57,7 +56,7 @@ Commands: \
 \n\t[[b;#268bd2;]wedding bride]           [[b;#2aa198;]# 關於新娘] \
 \n\t[[b;#268bd2;]wedding groom]           [[b;#2aa198;]# 關於新郎] \
 \n\t[[b;#268bd2;]wedding location]        [[b;#2aa198;]# 婚禮地點的 google map 連結] \
-\n\t[[b;#268bd2;]wedding gown]        [[b;#2aa198;]# 婚紗照] \
+\n\t[[b;#268bd2;]wedding gown]            [[b;#2aa198;]# 婚紗照] \
 	";
 	var bride = "\
 \n[[b;#d33682;]========= 新娘 ==========]\
@@ -91,7 +90,7 @@ Commands: \
 	pre_greetings = "\
 \n\n相當遺憾，您錯過了這場盛宴。 \
 \n孟容和俊錡已經在 2015/05/02 完成人生大事， \
-\n但您仍然能從這網站知道一些婚禮細節。 \
+\n但您仍然能在這知道一些婚禮細節。 \
 \n從新郎新娘資訊可以得到我們的聯絡方式。 \
 \n  "
 	} 
@@ -101,7 +100,6 @@ Commands: \
 \n安裝完成後即可輸入 [[b;#859900;]wedding] 指令查詢婚禮相關資訊。 \
 \n使用中有任何問題您可輸入 [[b;#859900;]help] 指令得到協助。\
 \n\
-\n \
 \n按下 [[b;#859900;]enter (↩)] 在終端機安裝婚禮小幫手.\
 \n  ";
 
@@ -185,12 +183,12 @@ Commands: \
 		} else if (inputs[1] === "invitation") {
 			term.echo(invitation_post);
 		} else if (inputs[1] === "location") {
-			term.echo(reservation_url_address);
-			term.echo(reservation_url_url);
+			term.echo(reservation_address);
+			term.echo(reservation_url);
 			term.push(function(command, term) {
 				if (/y(es){0,1}/.test(command)) {
 					window.open(
-						reservation_url_url,
+						reservation_url,
 						'_blank'
 					);
 				}
