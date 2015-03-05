@@ -6,7 +6,8 @@ $(function() {
 	var days_left = Math.round((new Date('2015 05 02') - new Date())/(1000*60*60*24));
 	var reservation_url = "http://goo.gl/EtmNRv";
 	var reservation_address = "高雄市中山區中山南路 437 號"
-
+	
+	var pictures = [picture1, picture2];
 
 	var apt_get_command = ['update', 'upgrade', 'dist-upgrade', 'autoremove']
 
@@ -56,6 +57,7 @@ Commands: \
 \n\t[[b;#268bd2;]wedding bride]           [[b;#2aa198;]# 關於新娘] \
 \n\t[[b;#268bd2;]wedding groom]           [[b;#2aa198;]# 關於新郎] \
 \n\t[[b;#268bd2;]wedding location]        [[b;#2aa198;]# 婚禮地點的 google map 連結] \
+\n\t[[b;#268bd2;]wedding gown]        [[b;#2aa198;]# 婚紗照] \
 	";
 	var bride = "\
 \n[[b;#d33682;]========= 新娘 ==========]\
@@ -106,7 +108,7 @@ Commands: \
 		i = 0;
 		foo = function(lines) {
 			return setTimeout((function() {
-				if (i < lines.length -1) {
+				if (i < lines.length) {
 					term.echo(lines[i]);
 					i++;
 					return foo(lines);
@@ -117,6 +119,25 @@ Commands: \
 			}), 1000);
 		};
 		return foo(lines);
+    };
+
+    function print_pictures(term, pictures, callback) {
+		var foo, i;
+		term.pause();
+		i = 0;
+		foo = function(pictures) {
+			return setTimeout((function() {
+				if (i < pictures.length) {
+					term.echo(pictures[i]);
+					i++;
+					return foo(pictures);
+				} else {
+					term.resume();
+					return callback();
+				}
+			}), 3000);
+		};
+		return foo(pictures);
     };
 
 	function require_command(command_regex, terminal_history) {
@@ -174,7 +195,10 @@ Commands: \
 				prompt: '是否在新視窗開啟地圖連結？ (yes/no) ',
 				greetings: null
 			});
-		} else {
+		} else if (inputs[1] == "gown") {
+			print_pictures(term, pictures , function(){
+			});
+		}else {
 			term.error(inputs + " : 查無指令")
 		}
 	}
@@ -240,7 +264,8 @@ Commands: \
 				'wedding invitation',
 				'wedding location',
 				'wedding groom',
-				'wedding bride']);
+				'wedding bride',
+				'wedding gown']);
 		},
 		tabcompletion: true
 	});
