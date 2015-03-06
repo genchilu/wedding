@@ -53,10 +53,12 @@ $(function() {
 	var wedding_help = "\
 Commands: \
 \n\t[[b;#268bd2;]wedding invitation]      [[b;#2aa198;]# 邀請卡內容] \
+\n\t[[b;#268bd2;]wedding schedule]        [[b;#2aa198;]# 婚禮行程表] \
 \n\t[[b;#268bd2;]wedding bride]           [[b;#2aa198;]# 關於新娘] \
 \n\t[[b;#268bd2;]wedding groom]           [[b;#2aa198;]# 關於新郎] \
 \n\t[[b;#268bd2;]wedding location]        [[b;#2aa198;]# 婚禮地點的 google map 連結] \
 \n\t[[b;#268bd2;]wedding gown]            [[b;#2aa198;]# 婚紗照] \
+\n\t[[b;#268bd2;]wedding travel]          [[b;#2aa198;]# 鄰近景點] \
 	";
 	var bride = "\
 \n[[b;#d33682;]========= 新娘 ==========]\
@@ -200,7 +202,13 @@ Commands: \
 		} else if (inputs[1] == "gown") {
 			print_pictures(term, pictures , function(){
 			});
-		}else {
+		} else if (inputs[1] == 'schedule') { 
+			term.echo(schedule);
+		} else if (inputs[1] == 'travel') {
+			travels.forEach(function (travel){
+				term.echo(travel);
+			});
+		} else {
 			term.error(inputs + " : 查無指令")
 		}
 	}
@@ -264,10 +272,12 @@ Commands: \
 		completion: function(term, string, callback){
 			callback(['apt-get install wedding',
 				'wedding invitation',
+				'wedding schedule',
 				'wedding location',
 				'wedding groom',
 				'wedding bride',
-				'wedding gown']);
+				'wedding gown',
+				'wedding travel']);
 		},
 		tabcompletion: true
 	});
