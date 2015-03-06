@@ -24,7 +24,7 @@ body {
     border-radius: 5px;
     height: 620px;
     margin-bottom:40px;
-    margin-top:40px;
+    margin-top:10px;
     max-width: 900px;
     overflow: hidden; 
     width: 90%;
@@ -463,13 +463,13 @@ body {
 }
 
 #icon-github{
-    text-align: -999px;
-    font-size: 1px;
+    text-align: 100px;
+    font-size: 20px;
     display:block;
-    width: 156px;
-    height: 133px;
-    background-image: url(../img/sprite.png);
-    background-position: 0 133px;
+    width: 120px;
+    height: 70px;
+	color:white;
+    background-position: 0 70px;
 }
 #icon-github:hover{
     background-position: 0 0px;
