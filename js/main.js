@@ -86,7 +86,7 @@ Commands: \
 	var pre_greetings;
 	if (days_left >= 0) {
 		pre_greetings = "\
-\n\n歡迎參加俊錡和孟蓉的婚禮，距離婚禮還有 " + Math.round((new Date('2015 05 02') - new Date())/86400000) + " 天！";
+\n\n歡迎參加俊錡和孟蓉的婚禮，距離[[s;#FF0000;]那美克星爆炸]婚禮還有 " + Math.round((new Date('2015 05 02') - new Date())/86400000) + " 天！";
 	}
 	else {
 	pre_greetings = "\
@@ -97,7 +97,6 @@ Commands: \
 \n  "
 	} 
 	var greetings = g7_weds_mono + pre_greetings + "\
-\n\n為了確保您能及時收到婚禮的相關資訊，\
 \n請先輸入[[b;#859900;]apt-get install wedding] 指令安裝婚禮小幫手。\
 \n安裝完成後即可輸入 [[b;#859900;]wedding] 指令查詢婚禮相關資訊。 \
 \n使用中有任何問題您可輸入 [[b;#859900;]help] 指令得到協助。\
