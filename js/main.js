@@ -5,9 +5,9 @@ $(function() {
 	var prompt = "[[b;#d33682;]root]@[[b;#6c71c4;]wedding] ~$ ";
 	var days_left = Math.round((new Date('2015 05 02') - new Date())/(1000*60*60*24));
 	var reservation_url = "http://goo.gl/EtmNRv";
-	var reservation_address = "高雄市中山區中山南路 437 號"
+	var reservation_address = "高雄市岡山區中山南路 437 號"
 	
-	var pictures = [picture1, picture2];
+	var pictures = [picture1, picture2, picture3, picture4];
 
 	var apt_get_command = ['update', 'upgrade', 'dist-upgrade', 'autoremove']
 
@@ -37,8 +37,9 @@ $(function() {
 	var invitation_post = "\
 \n______________________________________________________\
 \n  大家好，\
-\n  我們要在今年(2015)的五月二號互許終生啦！\
+\n  我們要在今年互許終生啦！\
 \n  歡迎各位親愛的捧油們一起來見證我們的婚禮，\
+\n  婚禮將於 2015/05/02 晚上六點半準時開始，\
 \n  現場將不會有任何 iphone 抽獎，請大家不用期待！\
 \n______________________________________________________\
 \n                 Mono    &  _  Genchi\
@@ -53,7 +54,6 @@ $(function() {
 	var wedding_help = "\
 Commands: \
 \n\t[[b;#268bd2;]wedding invitation]      [[b;#2aa198;]# 邀請卡內容] \
-\n\t[[b;#268bd2;]wedding schedule]        [[b;#2aa198;]# 婚禮行程表] \
 \n\t[[b;#268bd2;]wedding bride]           [[b;#2aa198;]# 關於新娘] \
 \n\t[[b;#268bd2;]wedding groom]           [[b;#2aa198;]# 關於新郎] \
 \n\t[[b;#268bd2;]wedding location]        [[b;#2aa198;]# 婚禮地點的 google map 連結] \
@@ -64,20 +64,22 @@ Commands: \
 \n[[b;#d33682;]========= 新娘 ==========]\
 \n\
 \n新娘的名字是江孟蓉，高雄出生。\
-\n目前在嘉義長庚醫院服務的護理師，同時也是一位極為刁鑽的 PM。\
+\n目前在嘉義長庚醫院服務的護理師。\
 \n最為人津津樂道的是他挑男朋友的眼光極佳。\
-\n你可以透過下列臉書連結聯繫她：\
-\nhttps://www.facebook.com/profile.php?id=100000138559507\
+\n你可以透過下列連結聯繫她：\
+\nfacebook - https://www.facebook.com/profile.php?id=100000138559507\
 \n\
 	";
+
 	var groom = "\
 \n[[b;#d33682;]========= 新郎 ==========]\
 \n\
 \n新郎的名字是盧俊錡，高雄出生。\
-\n他是一名不專業的軟體工程師，服務於專利雲公司，擅長解決 PM 刁鑽的問題。\
-\n2009 年以一名資深阿宅騙到正妹護士當女朋友得意至今。\
+\n他是一名在專利雲公司服務的不專業的軟體工程師，\
+\n同時也是位資深阿宅。\
+\n目前人生成就是騙到正妹護士當老婆。\
+\n你可以透過下列連結聯繫他。\
 \nemail - genchilu@gmail.com\
-\nlinkedin - https://www.linkedin.com/in/jaipandya \
 \nfacebook - https://www.facebook.com/profile.php?id=100000141676197\
 \ngithub - https://github.com/genchilu \
 \n\
@@ -201,8 +203,6 @@ Commands: \
 		} else if (inputs[1] == "gown") {
 			print_pictures(term, pictures , function(){
 			});
-		} else if (inputs[1] == 'schedule') { 
-			term.echo(schedule);
 		} else if (inputs[1] == 'travel') {
 			travels.forEach(function (travel){
 				term.echo(travel);
@@ -271,7 +271,6 @@ Commands: \
 		completion: function(term, string, callback){
 			callback(['apt-get install wedding',
 				'wedding invitation',
-				'wedding schedule',
 				'wedding location',
 				'wedding groom',
 				'wedding bride',
