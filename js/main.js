@@ -6,8 +6,6 @@ $(function() {
 	var days_left = Math.round((new Date('2015 05 02') - new Date())/(1000*60*60*24));
 	var reservation_url = "http://goo.gl/EtmNRv";
 	var reservation_address = "高雄市岡山區中山南路 437 號"
-	
-	var pictures = [picture1, picture2, picture3, picture4];
 
 	var apt_get_command = ['update', 'upgrade', 'dist-upgrade', 'autoremove']
 
@@ -54,10 +52,9 @@ $(function() {
 	var wedding_help = "\
 Commands: \
 \n\t[[b;#268bd2;]wedding invitation]      [[b;#2aa198;]# 邀請卡內容] \
+\n\t[[b;#268bd2;]wedding bridegroom]      [[b;#2aa198;]# 關於新郎] \
 \n\t[[b;#268bd2;]wedding bride]           [[b;#2aa198;]# 關於新娘] \
-\n\t[[b;#268bd2;]wedding groom]           [[b;#2aa198;]# 關於新郎] \
 \n\t[[b;#268bd2;]wedding location]        [[b;#2aa198;]# 婚禮地點的 google map 連結] \
-\n\t[[b;#268bd2;]wedding gown]            [[b;#2aa198;]# 婚紗照] \
 \n\t[[b;#268bd2;]wedding travel]          [[b;#2aa198;]# 鄰近景點] \
 	";
 	var bride = "\
@@ -71,11 +68,11 @@ Commands: \
 \n\
 	";
 
-	var groom = "\
+	var bridegroom = "\
 \n[[b;#d33682;]========= 新郎 ==========]\
 \n\
 \n新郎的名字是盧俊錡，高雄出生。\
-\n他是一名在專利雲公司服務的不專業的軟體工程師，\
+\n他是一名在專利雲公司服務的不專業軟體工程師，\
 \n同時也是位資深阿宅。\
 \n目前人生成就是騙到正妹護士當老婆。\
 \n你可以透過下列連結聯繫他。\
@@ -93,7 +90,7 @@ Commands: \
 	else {
 	pre_greetings = "\
 \n\n相當遺憾，您錯過了這場盛宴。 \
-\n孟容和俊錡已經在 2015/05/02 完成人生大事， \
+\n孟容和俊錡已經在 " + -days_left + " 天前結婚， \
 \n但您仍然能在這知道一些婚禮細節。 \
 \n從新郎新娘資訊可以得到我們的聯絡方式。 \
 \n  "
@@ -179,12 +176,12 @@ Commands: \
     function wedding(inputs, term){
 		if (!inputs[1]) {
 			term.echo(wedding_help);
-		} else if (inputs[1] === "bride") {
-			term.echo(bride);
-		} else if (inputs[1] === "groom") {
-			term.echo(groom)
 		} else if (inputs[1] === "invitation") {
-			term.echo(invitation_post);
+			term.echo(invitation_post); 
+		} else if (inputs[1] === "bridegroom") {
+			term.echo(bridegroom);
+		} else if (inputs[1] === "bride") {
+			term.echo(bride)
 		} else if (inputs[1] === "location") {
 			term.echo(reservation_address);
 			term.echo(reservation_url);
@@ -199,9 +196,6 @@ Commands: \
 			}, {
 				prompt: '是否在新視窗開啟地圖連結？ (yes/no) ',
 				greetings: null
-			});
-		} else if (inputs[1] == "gown") {
-			print_pictures(term, pictures , function(){
 			});
 		} else if (inputs[1] == 'travel') {
 			travels.forEach(function (travel){
@@ -271,10 +265,9 @@ Commands: \
 		completion: function(term, string, callback){
 			callback(['apt-get install wedding',
 				'wedding invitation',
-				'wedding location',
-				'wedding groom',
+				'wedding bridegroom',
 				'wedding bride',
-				'wedding gown',
+				'wedding location',
 				'wedding travel']);
 		},
 		tabcompletion: true
